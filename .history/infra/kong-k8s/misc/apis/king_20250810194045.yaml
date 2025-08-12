@@ -1,0 +1,22 @@
+apiVersion: configuration.konghq.com/v1
+kind: KongIngress
+metadata:
+  name: do-not-preserve-host
+route:
+  preserve_host: false
+upstream:
+  host_header: bets.bets.svc
+# apiVersion: extensions/v1beta1
+# kind: Ingress
+# metadata:
+#   name: productpage
+#   annotations:
+#     configuration.konghq.com: do-not-preserve-host
+# spec:
+#   rules:
+#   - http:
+#       paths:
+#       - path: /
+#         backend:
+#           serviceName: productpage
+#           servicePort: 9080
