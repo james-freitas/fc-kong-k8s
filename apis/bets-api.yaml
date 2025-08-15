@@ -3,9 +3,10 @@ info:
   title: Bets - Bets API
   version: 2.0.0
 servers:
-  - url: 'http://localhost:9999/api'
+  - url: "http://localhost:9999/api"
     description: Development Environment
-  - url: 'http://bets.bets.svc.cluster.local:9999'
+  - url: "http://bets.bets.svc:9999"
+    #- url: 'http://bets.bets.svc.cluster.local:9999'
     description: Kubernetes Environment
 
 x-kong-name: bets-api
@@ -40,7 +41,7 @@ paths:
       tags:
         - bets
       responses:
-        '201':
+        "201":
           content:
             application/json:
               examples:
@@ -49,8 +50,8 @@ paths:
                     match: 1X-DC
                     email: joe@doe.com
                     championship: Uefa Champions League
-                    awayTeamScore: '2'
-                    homeTeamScore: '3'
-          description: ''
+                    awayTeamScore: "2"
+                    homeTeamScore: "3"
+          description: ""
       operationId: create-bet
       summary: Create Bet
