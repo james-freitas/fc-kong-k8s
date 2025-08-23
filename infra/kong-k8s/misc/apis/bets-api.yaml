@@ -3,12 +3,11 @@ kind: Ingress
 metadata:
   name: bets-api
   annotations:
-    #kubernetes.io/ingress.class: "kong"
-    spec.ingressClassName: "kong"
     konghq.com/override: do-not-preserve-host
     #konghq.com/strip-path: "true"
     #konghq.com/plugins: oidc-bets,rl-by-header,prometheus-bets
 spec:
+  ingressClassName: kong
   rules:
     - http:
         paths:
