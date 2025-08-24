@@ -4,8 +4,7 @@ metadata:
   name: bets-api
   annotations:
     konghq.com/override: do-not-preserve-host
-    #konghq.com/strip-path: "true"
-    #konghq.com/plugins: oidc-bets,rl-by-header,prometheus-bets
+    konghq.com/plugins: oidc-bets
 spec:
   ingressClassName: kong
   rules:
