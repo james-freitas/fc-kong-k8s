@@ -8,5 +8,5 @@ spec:
     kind: Deployment
     name: bets
   minReplicas: 1
-  maxReplicas: 20
+  maxReplicas: 21
   targetCPUUtilizationPercentage: 70
