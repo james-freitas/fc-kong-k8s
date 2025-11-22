@@ -34,11 +34,13 @@ podSecurityPolicy:
 ## See https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/ for
 ## notes on enabling and using sysctls
 ##
-podSecurityContext: {}
+podSecurityContext:
+  {}
   # seLinuxOptions:
 #   type: "spc_t"
 
-securityContext: {}
+securityContext:
+  {}
   # capabilities:
   #   drop:
   #   - ALL
@@ -48,7 +50,8 @@ securityContext: {}
 
 # Configure the livecycle
 # Ref: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/
-lifecycle: {}
+lifecycle:
+  {}
   # preStop:
   #   exec:
 #     command: ["/bin/sh", "-c", "sleep 20"]
@@ -77,7 +80,8 @@ readinessProbe:
   # successThreshold: 1
   # failureThreshold: 3
 
-resources: {}
+resources:
+  {}
   # requests:
   #   cpu: 10m
   #   memory: 128Mi
@@ -92,7 +96,8 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
   ## see https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/#autoscaling-on-multiple-metrics-and-custom-metrics
-  customRules: []
+  customRules:
+    []
     # - type: Pods
     #   pods:
     #     metric:
@@ -172,32 +177,32 @@ envFrom: []
 
 initContainers: []
 
-volumes:
-  - name: varlog
-    hostPath:
-      path: /var/log
-  - name: varlibdockercontainers
-    hostPath:
-      path: /var/lib/docker/containers
-  - name: etcfluentd-main
-    configMap:
-      name: fluentd-main
-      defaultMode: 0777
-  - name: etcfluentd-config
-    configMap:
-      name: fluentd-config
-      defaultMode: 0777
+# volumes:
+#   - name: varlog
+#     hostPath:
+#       path: /var/log
+#   - name: varlibdockercontainers
+#     hostPath:
+#       path: /var/lib/docker/containers
+#   - name: etcfluentd-main
+#     configMap:
+#       name: fluentd-main
+#       defaultMode: 0777
+#   - name: etcfluentd-config
+#     configMap:
+#       name: fluentd-config
+#       defaultMode: 0777
 
-volumeMounts:
-  - name: varlog
-    mountPath: /var/log
-  - name: varlibdockercontainers
-    mountPath: /var/lib/docker/containers
-    readOnly: true
-  - name: etcfluentd-main
-    mountPath: /etc/fluent
-  - name: etcfluentd-config
-    mountPath: /etc/fluent/config.d/
+# volumeMounts:
+#   - name: varlog
+#     mountPath: /var/log
+#   - name: varlibdockercontainers
+#     mountPath: /var/lib/docker/containers
+#     readOnly: true
+#   - name: etcfluentd-main
+#     mountPath: /etc/fluent
+#   - name: etcfluentd-config
+#     mountPath: /etc/fluent/config.d/
 
 ## Only available if kind is StatefulSet
 ## Fluentd persistence
@@ -216,9 +221,9 @@ service:
   # loadBalancerIP:
   # externalTrafficPolicy: Local
   ports:
-   - name: "forwarder"
-     protocol: TCP
-     containerPort: 24224
+    - name: "forwarder"
+      protocol: TCP
+      containerPort: 24224
 
 ## Prometheus Monitoring
 ##
@@ -311,9 +316,8 @@ fileConfigs:
       bind 0.0.0.0 # optional. 0.0.0.0 by default
       delimiter "\n" # optional. "\n" (newline) by default
     </source>
-    
 
-  02_outputs.conf: |-    
+  02_outputs.conf: |-
     <match **>
       @type elasticsearch
       host "elasticsearch-master"
@@ -322,4 +326,3 @@ fileConfigs:
       user elastic
       password changeme
     </match>
-    
